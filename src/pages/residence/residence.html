@@ -1,0 +1,68 @@
+<!--
+  Generated template for the ResidencePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+      <form [formGroup]="residenceFormGroup">
+          <!-- <ion-item>
+            <ion-label color="primary" stacked>Id</ion-label>
+            <ion-input type="text" [(ngModel)]="residence.id" placeholder="Id"></ion-input>
+          </ion-item> -->
+          <ion-item>
+            <ion-label color="primary" stacked>Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="residence.name" required formControlName="name" [class.invalid]="!residenceFormGroup.controls.name.valid && (residenceFormGroup.controls.name.dirty)" placeholder="Nombre"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!residenceFormGroup.controls.name.valid  && (residenceFormGroup.controls.name.dirty)">
+              <p>Ingrese un nombre.</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary" stacked>Dirección</ion-label>
+            <ion-input type="text" [(ngModel)]="residence.address" required formControlName="address" [class.invalid]="!residenceFormGroup.controls.address.valid  && (residenceFormGroup.controls.address.dirty)"  placeholder="Dirección"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!residenceFormGroup.controls.address.valid  && (residenceFormGroup.controls.address.dirty)">
+              <p>Ingrese una dirección.</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary" stacked>Teléfono</ion-label>
+            <ion-input type="number" [(ngModel)]="residence.phone" formControlName="phone" [class.invalid]="!residenceFormGroup.controls.phone.valid  && (residenceFormGroup.controls.phone.dirty)" placeholder="Telefono"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!residenceFormGroup.controls.phone.valid  && (residenceFormGroup.controls.phone.dirty)">
+              <p>Ingrese un teléfono válido.</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary" stacked>Eslogan</ion-label>
+            <ion-input type="text" [(ngModel)]="residence.slogan" required formControlName="slogan" [class.invalid]="!residenceFormGroup.controls.slogan.valid  && (residenceFormGroup.controls.slogan.dirty)" placeholder="Eslogan"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!residenceFormGroup.controls.slogan.valid  && (residenceFormGroup.controls.slogan.dirty)">
+              <p>Ingrese un eslogan.</p>
+          </ion-item>
+
+          <ion-item>
+              <ion-label item-start color="primary" stacked>Foto</ion-label>
+              <button ion-button item-end color="secondary" (click)="accessGallery()"><ion-icon name="images"></ion-icon></button>
+              <button ion-button item-end color="secondary" (click)="takePicture()" ><ion-icon name="camera"></ion-icon></button>
+          </ion-item>
+          <ion-item no-lines>
+              <img [src]="residence.image"  *ngIf="residence.image"/>
+          </ion-item>
+        
+      </form>
+        
+    </ion-list>
+    <button ion-button full (click)="process()">Guardar</button>
+</ion-content>

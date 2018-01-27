@@ -1,0 +1,38 @@
+<!--
+  Generated template for the MyResidencesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mis Residencias</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addResidence()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+      <ion-item-sliding #item *ngFor="let resi of residencesList">
+        <ion-item (click)="goEdit(resi)">
+          <ion-thumbnail item-start>
+            <img [src]="resi.image"  *ngIf="resi.image"/>
+          </ion-thumbnail>
+          <h2>{{ resi.name }}</h2>
+          <p><b>Dirección:</b> {{ resi.address }}</p>
+          <p><b>Telefono:</b> {{ resi.phone }}</p>
+        </ion-item>
+        <ion-item-options side="right">
+            <button ion-button  color="danger" (click)="deleteResidence(resi)"><ion-icon name="trash"></ion-icon>
+               Eliminar
+            </button>
+          </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+</ion-content>
