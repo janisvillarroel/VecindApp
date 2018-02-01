@@ -1,3 +1,5 @@
+import { Resident } from "./resident";
+
 export class Residence {
 
     id: string;
@@ -6,6 +8,7 @@ export class Residence {
     address: String;
     phone: String;
     slogan: String;
+    residentList: Resident[];
 
 /*     
     constructor(id: String, name: String, image: String, address: String, phone: String, slogan: String) {

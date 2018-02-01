@@ -17,8 +17,8 @@ export class ResidenceServiceProvider {
   residences: AngularFireList<Residence>;
   
   constructor(public http: HttpClient, 
-    public residencesdb: AngularFireDatabase,
-    public afAuth: AngularFireAuth ) {
+              public residencesdb: AngularFireDatabase,
+              public afAuth: AngularFireAuth ) {
     console.log('Id usuario: '+afAuth.auth.currentUser.uid);
     this.residences = residencesdb.list('/residences/'+afAuth.auth.currentUser.uid);
     // this.residencesObs = this.residences.snapshotChanges()

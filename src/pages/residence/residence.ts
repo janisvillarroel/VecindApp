@@ -47,11 +47,9 @@ export class ResidencePage {
 
     this.operation = navParams.get('operation');
     if (this.operation == 'add'){
-      console.log('operacion adicionar');
       this.title = 'Registrar Residencia';
       this.residence = new Residence();
     } else if (this.operation == 'edit'){
-      console.log('operacion editar');
       this.title = 'Editar Residencia';
       this.residence = navParams.get('resi');
     }
@@ -110,5 +108,9 @@ export class ResidencePage {
       });
       toast.present();
     }
+  }
+
+  goResidents(resi: Residence){
+    this.navCtrl.push('ResidentListPage',{'resi':resi});
   }
 }

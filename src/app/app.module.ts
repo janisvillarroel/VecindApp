@@ -12,6 +12,7 @@ import {AngularFireAuthModule, AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
 import { ResidenceServiceProvider } from '../providers/residence-service/residence-service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ResidentServiceProvider } from '../providers/resident-service/resident-service';
 
 export const configFirebase = {
   apiKey: "AIzaSyDgwtrPA9_vLwRO459eqP1mNDdGErvbzOo",
@@ -48,7 +49,8 @@ export const configFirebase = {
     HttpClient,
     AngularFireDatabase,
     AngularFireAuth,
-    ResidenceServiceProvider
+    ResidenceServiceProvider,
+    ResidentServiceProvider
   ]
 })
 export class AppModule {}

@@ -69,8 +69,11 @@ export class MyResidencesPage {
   }
 
   deleteResidence(residence: Residence){
+    var auxResi;
+    auxResi = residence.name;
+    
     let prompt = this.alertCtrl.create({
-      title: 'Residencias',
+      title: auxResi,
       message: "Esta seguro de eliminar la residencia?",
       buttons: [
         {
