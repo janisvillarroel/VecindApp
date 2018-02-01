@@ -26,9 +26,9 @@
               <img [src]="resi.photo"  *ngIf="resi.photo"/>
             </ion-avatar>
             <h2>{{ resi.name }} {{ resi.lastName }}</h2>
-            <p><b>Correo Electronico:</b> {{ resi.email }}</p>
+            <p><b>Correo Electrónico:</b> {{ resi.email }}</p>
             <p><b>Departamento:</b> {{ resi.apartmentNumber }}</p>
-            <p><b>Telefono:</b> {{ resi.phone }}</p>
+            <p><b>Teléfono:</b> {{ resi.phone }}</p>
           </ion-item>
           <ion-item-options side="right">
               <button ion-button  color="danger" (click)="deleteResident(resi)"><ion-icon name="trash"></ion-icon>

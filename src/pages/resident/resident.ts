@@ -61,7 +61,7 @@ export class ResidentPage {
 
     
     if (this.operation == 'add'){
-      this.title = 'Generar Invitacion';
+      this.title = 'Generar Invitación';
       this.processButton = 'Generar';
       this.resident = new Resident();
       this.resident.residence_id = navParams.get('residence_id');

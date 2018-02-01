@@ -17,11 +17,11 @@
         <form [formGroup]="residentFormGroup">
 
             <ion-item>
-                <ion-label color="primary" stacked>Correo Electronico</ion-label>
-                <ion-input type="text" [(ngModel)]="resident.email" required formControlName="email" [class.invalid]="!residentFormGroup.controls.email.valid && (residentFormGroup.controls.email.dirty)" placeholder="Correo Electronico"></ion-input>
+                <ion-label color="primary" stacked>Correo Electrónico</ion-label>
+                <ion-input type="text" [(ngModel)]="resident.email" required formControlName="email" [class.invalid]="!residentFormGroup.controls.email.valid && (residentFormGroup.controls.email.dirty)" placeholder="Correo Electrónico"></ion-input>
             </ion-item>
             <ion-item *ngIf="!residentFormGroup.controls.email.valid  && (residentFormGroup.controls.email.dirty)">
-                  <p>Ingrese un correo electronico valido.</p>
+                  <p>Ingrese un correo electrónico valido.</p>
             </ion-item>
   
             <ion-item *ngIf="!addMode">
@@ -41,11 +41,11 @@
             </ion-item>
   
             <ion-item *ngIf="!addMode">
-                <ion-label color="primary" stacked>Telefono</ion-label>
-                <ion-input type="number" [(ngModel)]="resident.phone" required formControlName="phone" [class.invalid]="!residentFormGroup.controls.phone.valid && (residentFormGroup.controls.phone.dirty)" placeholder="Telefono"></ion-input>
+                <ion-label color="primary" stacked>Teléfono</ion-label>
+                <ion-input type="number" [(ngModel)]="resident.phone" required formControlName="phone" [class.invalid]="!residentFormGroup.controls.phone.valid && (residentFormGroup.controls.phone.dirty)" placeholder="Teléfono"></ion-input>
             </ion-item>
             <ion-item *ngIf="!addMode && !residentFormGroup.controls.phone.valid  && residentFormGroup.controls.phone.dirty">
-                  <p>Ingrese un telefono valido.</p>
+                  <p>Ingrese un teléfono valido.</p>
             </ion-item>
 
             <ion-item *ngIf="!addMode">
