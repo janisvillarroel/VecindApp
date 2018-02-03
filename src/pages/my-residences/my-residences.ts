@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Navbar, AlertController } from 'ionic-angular';
 import { Residence } from '../../models/residence';
 import { ResidenceServiceProvider } from '../../providers/residence-service/residence-service';
+import { User } from '../../models/user';
 
 /**
  * Generated class for the MyResidencesPage page.
@@ -18,11 +19,7 @@ import { ResidenceServiceProvider } from '../../providers/residence-service/resi
 export class MyResidencesPage {
 
   @ViewChild(Navbar) navBar: Navbar;
-  
-  // residencesList: Residence[] = [
-  //   {id: '1', name:'Edificio Victoria', image:'imagen', address: 'Av. Santa Cruz #1500', phone:'4545444',slogan:'Mejor no hay'},
-  //   {id: '2', name:'Edificio Trinidad 3', image:'imagen', address: 'Juan Capriles #454', phone:'54545444',slogan:'Cerca de ti'}
-  // ];
+  public user: User;
 
   residencesList: Residence[];
   
@@ -30,16 +27,12 @@ export class MyResidencesPage {
               public navParams: NavParams, 
               public residenceServiceProvider: ResidenceServiceProvider,
               public alertCtrl: AlertController) {
-//     residenceServiceProvider.getResidences().subscribe(data => {
-//       this.residencesList = data;
-//     });
-
+    this.user=this.navParams.get('user');
     residenceServiceProvider.getResidences().subscribe(data => {
-     
+   
       this.residencesList = new Array();
 
       for (let i = 0; i < data.length; i++) {
-//        console.log(data[i].payload.val());
         this.residencesList.push(data[i].payload.val());
         this.residencesList[i].id = data[i].key;
       }
@@ -68,6 +61,10 @@ export class MyResidencesPage {
     this.navCtrl.push('ResidencePage',{'operation':'edit','resi':resi});
   }
 
+  goRequestList(residence: Residence){
+    this.navCtrl.push('RequestListPage',{'residence':residence,'user':this.user});
+  }
+
   deleteResidence(residence: Residence){
     var auxResi;
     auxResi = residence.name;
@@ -91,5 +88,9 @@ export class MyResidencesPage {
       ]
     });
     prompt.present();
+  }
+
+  goResidents(resi: Residence){
+    this.navCtrl.push('ResidentListPage',{'resi':resi});
   }
 }

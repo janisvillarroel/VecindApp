@@ -20,16 +20,27 @@
 <ion-content padding>
     <ion-list>
       <ion-item-sliding #item *ngFor="let resi of residencesList">
-        <ion-item (click)="goEdit(resi)">
+        <ion-item >
           <ion-thumbnail item-start>
             <img [src]="resi.image"  *ngIf="resi.image"/>
           </ion-thumbnail>
           <h2>{{ resi.name }}</h2>
           <p><b>Dirección:</b> {{ resi.address }}</p>
           <p><b>Telefono:</b> {{ resi.phone }}</p>
+          <ion-buttons>
+              <button ion-button icon-only (click)="goEdit(resi)">
+                  <ion-icon name="create"></ion-icon>
+              </button>
+              <button ion-button icon-only (click)="goRequestList(resi)">
+                  <ion-icon ios="logo-buffer" md="logo-buffer"></ion-icon>
+              </button>
+              <button ion-button icon-only (click)="goResidents(resi)">
+                  <ion-icon name="people"></ion-icon>
+              </button>
+          </ion-buttons>
         </ion-item>
         <ion-item-options side="right">
-            <button ion-button  color="danger" (click)="deleteResidence(resi)"><ion-icon name="trash"></ion-icon>
+            <button ion-button  color="danger" (click)="deleteResidence(resi,user)"><ion-icon name="trash"></ion-icon>
                Eliminar
             </button>
           </ion-item-options>

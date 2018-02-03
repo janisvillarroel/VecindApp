@@ -1,0 +1,31 @@
+<!--
+  Generated template for the RequestDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Detalle de solicititud</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <p>
+        <b>Fecha:</b> {{ request.timestamp | date:"MM/dd/yy hh:mm a" }} <br/>
+        <b>Motivo:</b> {{ request.reason }} <br/>
+        <b>Descripcion:</b> {{ request.description }} <br/>
+        <b>Usuario:</b> {{ request.userName }} <br/>
+        <b>Estado:</b> {{ request.status }}
+    </p>
+    Comentarios:
+    <ion-list>
+        <ion-item-sliding #item *ngFor="let request of answerList">
+          <ion-item >
+
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+</ion-content>

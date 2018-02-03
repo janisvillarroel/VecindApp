@@ -110,7 +110,5 @@ export class ResidencePage {
     }
   }
 
-  goResidents(resi: Residence){
-    this.navCtrl.push('ResidentListPage',{'resi':resi});
-  }
+ 
 }

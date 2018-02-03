@@ -32,7 +32,7 @@ export class LoginPage {
     console.log(this.user);
     this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
     .then(result => {
-      this.navCtrl.push('MyResidencesPage');
+      this.navCtrl.push('MyResidencesPage',{'user':this.user});
     }).catch(err => {
       let toast = this.toastCtrl.create({
         message: err.message,
