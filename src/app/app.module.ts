@@ -19,7 +19,7 @@ import {LoginPage} from '../pages/login/login';
 import {WelcomePage} from '../pages/welcome/welcome';
 import {AboutPage} from '../pages/about/about';
 import {HelpPage} from '../pages/help/help';
-//import {UserlogPage} from '../pages/userlog/userlog';
+
 
 /* Giovo Database */
 /*export const configFirebase = {
@@ -57,7 +57,7 @@ export const configFirebase = {
     LoginPage,
     AboutPage,
     HelpPage
-    //UserlogPage
+    
     
    
   ],
@@ -77,7 +77,7 @@ export const configFirebase = {
     LoginPage,
     AboutPage,
     HelpPage
-    //UserlogPage
+   
   
     
     
