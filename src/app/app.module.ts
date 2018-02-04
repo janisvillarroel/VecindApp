@@ -14,6 +14,13 @@ import { ResidenceServiceProvider } from '../providers/residence-service/residen
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ResidentServiceProvider } from '../providers/resident-service/resident-service';
 import { RequestProvider } from '../providers/request/request';
+
+import {LoginPage} from '../pages/login/login';
+import {WelcomePage} from '../pages/welcome/welcome';
+import {AboutPage} from '../pages/about/about';
+import {HelpPage} from '../pages/help/help';
+//import {UserlogPage} from '../pages/userlog/userlog';
+
 /* Giovo Database */
 /*export const configFirebase = {
   apiKey: "AIzaSyDgwtrPA9_vLwRO459eqP1mNDdGErvbzOo",
@@ -24,19 +31,35 @@ import { RequestProvider } from '../providers/request/request';
   messagingSenderId: "306849589842"
 };*/
 /* Janis Database */
-export const configFirebase = {
+/*export const configFirebase = {
   apiKey: "AIzaSyAhtRFkrV0k_zOcwcJbUyOGqHNs7kAmr7U",
   authDomain: "finalproject-a0e01.firebaseapp.com",
   databaseURL: "https://finalproject-a0e01.firebaseio.com",
   projectId: "finalproject-a0e01",
   storageBucket: "finalproject-a0e01.appspot.com",
   messagingSenderId: "445318475144"
+};*/
+
+/* Isaac Database */
+export const configFirebase = {
+  apiKey: "AIzaSyBK_hPK7xgbtJRmPc--GEvWTz0wp9hctuc",
+  authDomain: "pruebavecindpp.firebaseapp.com",
+  databaseURL: "https://pruebavecindpp.firebaseio.com",
+  projectId: "pruebavecindpp",
+  storageBucket: "pruebavecindpp.appspot.com",
+  messagingSenderId: "495188731312"
 };
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    AboutPage,
+    HelpPage
+    //UserlogPage
+    
+   
   ],
   imports: [
     BrowserModule,
@@ -44,12 +67,21 @@ export const configFirebase = {
     HttpClientModule,
     AngularFireModule.initializeApp(configFirebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage,
+    AboutPage,
+    HelpPage
+    //UserlogPage
+  
+    
+    
+    
   ],
   providers: [
     StatusBar,
