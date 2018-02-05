@@ -43,7 +43,7 @@ export class MyApp {
 
     this.appMenuItems = [
         {title: 'Mi Residencia', component: LoginPage, icon: 'home'},
-        {title: 'Administrar Comunidad', component: LoginPage, icon: 'people'},
+        {title: 'Gestionar Residencias', component: LoginPage, icon: 'people'},
     ];
 
     this.accountMenuItems = [
