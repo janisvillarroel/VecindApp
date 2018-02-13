@@ -28,8 +28,8 @@ export class ResidenceServiceProvider {
 
   }
 
-  getResidences(): Observable<any[]>{
-    return this.residences.snapshotChanges();
+  getResidences(): AngularFireList<Residence>{
+    return this.residences;
   }
 
   addResidence(residence: Residence){
@@ -42,5 +42,10 @@ export class ResidenceServiceProvider {
 
   deleteResidence(key: string){
     this.residences.remove(key);
+  }
+
+  getResidence(userId: string, residentId: string): Observable<any[]>{
+    this.residences = this.residencesdb.list('/residences/'+userId+'/'+residentId);
+    return this.residences.snapshotChanges();
   }
 }

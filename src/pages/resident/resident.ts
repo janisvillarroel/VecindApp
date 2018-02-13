@@ -4,6 +4,8 @@ import { Resident } from '../../models/resident';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ResidentServiceProvider } from '../../providers/resident-service/resident-service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { UserResidence } from '../../models/user_residence';
 
 /**
  * Generated class for the ResidentPage page.
@@ -25,6 +27,8 @@ export class ResidentPage {
   public processButton: String;
   public addMode: Boolean = false;
   residentFormGroup: FormGroup;
+  resi: String;
+  public userResidence: UserResidence;
 
   options: CameraOptions = {
     quality: 100,
@@ -38,7 +42,8 @@ export class ResidentPage {
               public camera: Camera, 
               public residentServiceProvider: ResidentServiceProvider,
               public formBuilder: FormBuilder,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController,
+              public afAuth: AngularFireAuth) {
 
     this.operation = navParams.get('operation');
 
@@ -46,7 +51,7 @@ export class ResidentPage {
       this.residentFormGroup = formBuilder.group({
         email: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])]
       });
-    } else if (this.operation == 'edit'){
+    } else if (this.operation == 'edit'||this.operation == 'complete'){
       this.residentFormGroup = formBuilder.group({
         email: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
         name: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*'),Validators.required])],
@@ -68,10 +73,26 @@ export class ResidentPage {
       this.resident.pets = false;
       this.resident.owner = false;
       this.addMode = true;
+      this.userResidence = new UserResidence();
+      this.userResidence.residence_id = this.resident.residence_id;
+      this.userResidence.residence_owner_id = afAuth.auth.currentUser.uid;
+
     } else if (this.operation == 'edit'){
       this.title = 'Editar Residente';
       this.processButton = 'Guardar';
       this.resident = navParams.get('resi');
+    } else if (this.operation == 'complete') {
+      this.title = 'Editar Residente';
+      this.processButton = 'Guardar';
+      this.resident = navParams.get('resi');
+      this.userResidence = navParams.get('userResi');
+//      residentServiceProvider.setResident(this.userResidence.residence_owner_id, this.userResidence.residence_id, this.userResidence.resident_id);
+
+      // residentServiceProvider.getResidents().valueChanges().subscribe(data => {
+     
+      //   this.residentsList = data;
+  
+      // });
     }
   }
 
@@ -103,13 +124,43 @@ export class ResidentPage {
   }
 
   saveResident(resident: Resident){
-    this.residentServiceProvider.addResident(resident);
-    this.navCtrl.pop();
+
+    this.resi = null;
+
+    this.residentServiceProvider.checkEmail(resident.residence_id, resident.email as string)
+    .forEach (response => {
+      if(response.length === 0 && this.resi === null) {
+        this.resi = '1';
+        //console.log("User does not exist");
+        //console.log('Guardara');
+        this.userResidence.email = resident.email;
+        this.residentServiceProvider.addResident(resident,this.userResidence);
+        this.navCtrl.pop();
+      } else if (this.resi !== '1' && this.resi === null) {
+        //console.log("Users exists");
+        this.resi = '0';
+        let toast = this.toastCtrl.create({
+          message: 'El correo electrónico esta asociado a un residente.',
+          duration: 3000
+        });
+        toast.present();
+      }
+    });
+
+    this.resi = null;
   }
 
   editResident(key: string, resident: Resident){
-    this.residentServiceProvider.updateResident(key, resident);
-    this.navCtrl.pop();
+    if (this.operation == 'complete'){
+      this.residentServiceProvider.updateOnlyResident(resident)
+      this.userResidence.status = 'Active';
+      this.residentServiceProvider.updateUserResident(this.userResidence.id, this.userResidence);
+      this.navCtrl.push('HelpPage');
+    }else {
+      this.residentServiceProvider.updateResident(key, resident);
+      this.navCtrl.pop();
+    }
+    
   }
 
   process(){
@@ -117,7 +168,7 @@ export class ResidentPage {
     if (this.residentFormGroup.valid){
       if (this.operation == 'add'){
         this.saveResident(this.resident);
-      } else if (this.operation == 'edit'){
+      } else if (this.operation == 'edit' || this.operation == 'complete'){
         if (this.resident.car_identifier == undefined){
           this.resident.car_identifier = null;
         }

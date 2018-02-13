@@ -6,30 +6,29 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireAuthModule, AngularFireAuth} from 'angularfire2/auth';
-import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
+//import { HomePage } from '../pages/home/home';
+import { AngularFireModule} from 'angularfire2';
+import { AngularFireAuthModule, AngularFireAuth} from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
 import { ResidenceServiceProvider } from '../providers/residence-service/residence-service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ResidentServiceProvider } from '../providers/resident-service/resident-service';
 import { RequestProvider } from '../providers/request/request';
 
-import {LoginPage} from '../pages/login/login';
-import {WelcomePage} from '../pages/welcome/welcome';
-import {AboutPage} from '../pages/about/about';
-import {HelpPage} from '../pages/help/help';
+//import {LoginPage} from '../pages/login/login';
+//import {AboutPage} from '../pages/about/about';
+//import {HelpPage} from '../pages/help/help';
 
 
 /* Giovo Database */
-/*export const configFirebase = {
+export const configFirebase = {
   apiKey: "AIzaSyDgwtrPA9_vLwRO459eqP1mNDdGErvbzOo",
   authDomain: "ionic-chat-bbe23.firebaseapp.com",
   databaseURL: "https://ionic-chat-bbe23.firebaseio.com",
   projectId: "ionic-chat-bbe23",
   storageBucket: "ionic-chat-bbe23.appspot.com",
   messagingSenderId: "306849589842"
-};*/
+};
 /* Janis Database */
 /*export const configFirebase = {
   apiKey: "AIzaSyAhtRFkrV0k_zOcwcJbUyOGqHNs7kAmr7U",
@@ -41,25 +40,19 @@ import {HelpPage} from '../pages/help/help';
 };*/
 
 /* Isaac Database */
-export const configFirebase = {
+/* export const configFirebase = {
   apiKey: "AIzaSyBK_hPK7xgbtJRmPc--GEvWTz0wp9hctuc",
   authDomain: "pruebavecindpp.firebaseapp.com",
   databaseURL: "https://pruebavecindpp.firebaseio.com",
   projectId: "pruebavecindpp",
   storageBucket: "pruebavecindpp.appspot.com",
   messagingSenderId: "495188731312"
-};
+}; */
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    AboutPage,
-    HelpPage
-    
-    
-   
+    MyApp
+       
   ],
   imports: [
     BrowserModule,
@@ -72,16 +65,7 @@ export const configFirebase = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    AboutPage,
-    HelpPage
-   
-  
-    
-    
-    
+    MyApp
   ],
   providers: [
     StatusBar,

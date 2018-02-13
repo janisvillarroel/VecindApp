@@ -6,92 +6,93 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{title}}</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-<ion-content padding>
-    <ion-list>
-        <form [formGroup]="residentFormGroup">
-
-            <ion-item>
-                <ion-label color="primary" stacked>Correo Electrónico</ion-label>
-                <ion-input type="text" [(ngModel)]="resident.email" required formControlName="email" [class.invalid]="!residentFormGroup.controls.email.valid && (residentFormGroup.controls.email.dirty)" placeholder="Correo Electrónico"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!residentFormGroup.controls.email.valid  && (residentFormGroup.controls.email.dirty)">
-                  <p>Ingrese un correo electrónico valido.</p>
-            </ion-item>
+    <ion-navbar>
+      <ion-title>{{title}}</ion-title>
+    </ion-navbar>
   
-            <ion-item *ngIf="!addMode">
-              <ion-label color="primary" stacked>Nombres</ion-label>
-              <ion-input type="text" [(ngModel)]="resident.name" required formControlName="name" [class.invalid]="!residentFormGroup.controls.name.valid && (residentFormGroup.controls.name.dirty)" placeholder="Nombres"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!addMode && !residentFormGroup.controls.name.valid  && residentFormGroup.controls.name.dirty">
-                <p>Ingrese un nombre valido.</p>
-            </ion-item>
-
-            <ion-item *ngIf="!addMode">
-                <ion-label color="primary" stacked>Apellidos</ion-label>
-                <ion-input type="text" [(ngModel)]="resident.lastName" required formControlName="lastName" [class.invalid]="!residentFormGroup.controls.lastName.valid && (residentFormGroup.controls.lastName.dirty)" placeholder="Apellidos"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!addMode && !residentFormGroup.controls.lastName.valid  && residentFormGroup.controls.lastName.dirty">
-                  <p>Ingrese un apellido valido.</p>
-            </ion-item>
+  </ion-header>
   
-            <ion-item *ngIf="!addMode">
-                <ion-label color="primary" stacked>Teléfono</ion-label>
-                <ion-input type="number" [(ngModel)]="resident.phone" required formControlName="phone" [class.invalid]="!residentFormGroup.controls.phone.valid && (residentFormGroup.controls.phone.dirty)" placeholder="Teléfono"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!addMode && !residentFormGroup.controls.phone.valid  && residentFormGroup.controls.phone.dirty">
-                  <p>Ingrese un teléfono valido.</p>
-            </ion-item>
-
-            <ion-item *ngIf="!addMode">
-                <ion-label color="primary" stacked>Departamento/Residencia</ion-label>
-                <ion-input type="text" [(ngModel)]="resident.apartmentNumber" required formControlName="apartmentNumber" [class.invalid]="!residentFormGroup.controls.apartmentNumber.valid && (residentFormGroup.controls.apartmentNumber.dirty)" placeholder="Departamento"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!addMode && !residentFormGroup.controls.apartmentNumber.valid  && residentFormGroup.controls.apartmentNumber.dirty">
-                  <p>Ingrese un numero de departamento/residencia valido.</p>
-            </ion-item>
-
-            <ion-item *ngIf="!addMode">
-                <ion-label color="primary" stacked>Placa Automovil</ion-label>
-                <ion-input type="text" [(ngModel)]="resident.car_identifier" (ionChange)="updateCarId(resident.car_identifier)" formControlName="car_identifier" [class.invalid]="!residentFormGroup.controls.car_identifier.valid && (residentFormGroup.controls.car_identifier.dirty)"  placeholder="Placa Automovil"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!addMode && !residentFormGroup.controls.car_identifier.valid  && residentFormGroup.controls.car_identifier.dirty">
-                  <p>Ingrese un numero de placa valido.</p>
-            </ion-item>
-
-            <ion-item *ngIf="!addMode">
-                <ion-label color="primary" stacked>Mascota(s)</ion-label>
-                <!-- <ion-toggle [(ngModel)]="resident.pets" formControlName="pets" checked="false"></ion-toggle> -->
-                <ion-toggle [ngModel]="resident.pets" formControlName="pets" (ngModelChange)="updatePets($event)"></ion-toggle>
-                <ion-label>
-                  Tiene mascota(s)
-                </ion-label>
-            </ion-item>
-
-            <ion-item *ngIf="!addMode">
-                <ion-label color="primary" stacked>Propietario</ion-label>
-                <ion-toggle [ngModel]="resident.owner" formControlName="owner" (ngModelChange)="updateOwner($event)"></ion-toggle>
-                <ion-label>
-                  Es propietario
-                </ion-label>
-            </ion-item>
-
-            <ion-item *ngIf="!addMode">
-                <ion-label item-start color="primary" stacked>Foto</ion-label>
-                <button ion-button item-end color="secondary" (click)="accessGallery()"><ion-icon name="images"></ion-icon></button>
-                <button ion-button item-end color="secondary" (click)="takePicture()" ><ion-icon name="camera"></ion-icon></button>
-            </ion-item>
-            <ion-item no-lines *ngIf="!addMode">
-                <img [src]="resident.photo"  *ngIf="resident.photo"/>
-            </ion-item>
-          
-        </form>
-          
-      </ion-list>
-      <button ion-button full (click)="process()">{{processButton}}</button>
-</ion-content>
+  <ion-content padding>
+      <ion-list>
+          <form [formGroup]="residentFormGroup">
+  
+              <ion-item>
+                  <ion-label color="primary" stacked>Correo Electrónico</ion-label>
+                  <ion-input type="text" [(ngModel)]="resident.email" required formControlName="email" [class.invalid]="!residentFormGroup.controls.email.valid && (residentFormGroup.controls.email.dirty)" placeholder="Correo Electrónico"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!residentFormGroup.controls.email.valid  && (residentFormGroup.controls.email.dirty)">
+                    <p>Ingrese un correo electrónico valido.</p>
+              </ion-item>
+    
+              <ion-item *ngIf="!addMode">
+                <ion-label color="primary" stacked>Nombres</ion-label>
+                <ion-input type="text" [(ngModel)]="resident.name" required formControlName="name" [class.invalid]="!residentFormGroup.controls.name.valid && (residentFormGroup.controls.name.dirty)" placeholder="Nombres"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!addMode && !residentFormGroup.controls.name.valid  && residentFormGroup.controls.name.dirty">
+                  <p>Ingrese un nombre valido.</p>
+              </ion-item>
+  
+              <ion-item *ngIf="!addMode">
+                  <ion-label color="primary" stacked>Apellidos</ion-label>
+                  <ion-input type="text" [(ngModel)]="resident.lastName" required formControlName="lastName" [class.invalid]="!residentFormGroup.controls.lastName.valid && (residentFormGroup.controls.lastName.dirty)" placeholder="Apellidos"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!addMode && !residentFormGroup.controls.lastName.valid  && residentFormGroup.controls.lastName.dirty">
+                    <p>Ingrese un apellido valido.</p>
+              </ion-item>
+    
+              <ion-item *ngIf="!addMode">
+                  <ion-label color="primary" stacked>Teléfono</ion-label>
+                  <ion-input type="number" [(ngModel)]="resident.phone" required formControlName="phone" [class.invalid]="!residentFormGroup.controls.phone.valid && (residentFormGroup.controls.phone.dirty)" placeholder="Teléfono"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!addMode && !residentFormGroup.controls.phone.valid  && residentFormGroup.controls.phone.dirty">
+                    <p>Ingrese un teléfono valido.</p>
+              </ion-item>
+  
+              <ion-item *ngIf="!addMode">
+                  <ion-label color="primary" stacked>Departamento/Residencia</ion-label>
+                  <ion-input type="text" [(ngModel)]="resident.apartmentNumber" required formControlName="apartmentNumber" [class.invalid]="!residentFormGroup.controls.apartmentNumber.valid && (residentFormGroup.controls.apartmentNumber.dirty)" placeholder="Departamento"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!addMode && !residentFormGroup.controls.apartmentNumber.valid  && residentFormGroup.controls.apartmentNumber.dirty">
+                    <p>Ingrese un numero de departamento/residencia valido.</p>
+              </ion-item>
+  
+              <ion-item *ngIf="!addMode">
+                  <ion-label color="primary" stacked>Placa Automovil</ion-label>
+                  <ion-input type="text" [(ngModel)]="resident.car_identifier" (ionChange)="updateCarId(resident.car_identifier)" formControlName="car_identifier" [class.invalid]="!residentFormGroup.controls.car_identifier.valid && (residentFormGroup.controls.car_identifier.dirty)"  placeholder="Placa Automovil"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!addMode && !residentFormGroup.controls.car_identifier.valid  && residentFormGroup.controls.car_identifier.dirty">
+                    <p>Ingrese un numero de placa valido.</p>
+              </ion-item>
+  
+              <ion-item *ngIf="!addMode">
+                  <ion-label color="primary" stacked>Mascota(s)</ion-label>
+                  <!-- <ion-toggle [(ngModel)]="resident.pets" formControlName="pets" checked="false"></ion-toggle> -->
+                  <ion-toggle [ngModel]="resident.pets" formControlName="pets" (ngModelChange)="updatePets($event)"></ion-toggle>
+                  <ion-label>
+                    Tiene mascota(s)
+                  </ion-label>
+              </ion-item>
+  
+              <ion-item *ngIf="!addMode">
+                  <ion-label color="primary" stacked>Propietario</ion-label>
+                  <ion-toggle [ngModel]="resident.owner" formControlName="owner" (ngModelChange)="updateOwner($event)"></ion-toggle>
+                  <ion-label>
+                    Es propietario
+                  </ion-label>
+              </ion-item>
+  
+              <ion-item *ngIf="!addMode">
+                  <ion-label item-start color="primary" stacked>Foto</ion-label>
+                  <button ion-button item-end color="secondary" (click)="accessGallery()"><ion-icon name="images"></ion-icon></button>
+                  <button ion-button item-end color="secondary" (click)="takePicture()" ><ion-icon name="camera"></ion-icon></button>
+              </ion-item>
+              <ion-item no-lines *ngIf="!addMode">
+                  <img [src]="resident.photo"  *ngIf="resident.photo"/>
+              </ion-item>
+            
+          </form>
+            
+        </ion-list>
+        <button ion-button full (click)="process()">{{processButton}}</button>
+  </ion-content>
+  

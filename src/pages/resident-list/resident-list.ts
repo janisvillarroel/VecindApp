@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { Resident } from '../../models/resident';
 import { ResidentServiceProvider } from '../../providers/resident-service/resident-service';
 import { Residence } from '../../models/residence';
@@ -24,14 +24,22 @@ export class ResidentListPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public residentServiceProvider: ResidentServiceProvider,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public loadingCtrl: LoadingController) {
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Recuperando residentes, por favor espere...'
+    });
+    loading.present();
+
     if (this.residence == null){
       this.residence = navParams.get('resi');
     }
 
     residentServiceProvider.setResidentsFromResidence(this.residence.id);
 
-    residentServiceProvider.getResidents().subscribe(data => {
+    residentServiceProvider.getResidents().snapshotChanges().subscribe(data => {
      
       this.residentsList = new Array();
 
@@ -39,6 +47,8 @@ export class ResidentListPage {
         this.residentsList.push(data[i].payload.val());
         this.residentsList[i].id = data[i].key;
       }
+
+      loading.dismissAll();
     });
   }
 
