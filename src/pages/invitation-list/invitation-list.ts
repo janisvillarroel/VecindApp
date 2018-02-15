@@ -5,6 +5,7 @@ import { ResidentServiceProvider } from '../../providers/resident-service/reside
 import { ResidenceServiceProvider } from '../../providers/residence-service/residence-service';
 import { UserResidence } from '../../models/user_residence';
 import { Resident } from '../../models/resident';
+import { UserResidenceProvider } from '../../providers/user-residence-service/user-residence-service';
 
 /**
  * Generated class for the InvitationListPage page.
@@ -29,6 +30,7 @@ export class InvitationListPage {
               public navParams: NavParams, 
               public residentServiceProvider: ResidentServiceProvider,
               public residenceServiceProvider: ResidenceServiceProvider,
+              public userResidenceProvider: UserResidenceProvider,
               public alertCtrl: AlertController,
               public toastCtrl: ToastController,
               public loadingCtrl: LoadingController) {
@@ -41,7 +43,7 @@ export class InvitationListPage {
 
     this.user=this.navParams.get('user');
 
-    residentServiceProvider.getUserResidenceByEmail(this.user.email).snapshotChanges().subscribe(data => {
+    userResidenceProvider.getUserResidenceByEmail(this.user.email).snapshotChanges().subscribe(data => {
      
       if (data.length == 0){
         this.showMessageEmptyList();
@@ -53,31 +55,32 @@ export class InvitationListPage {
           this.userResidence = data[i].payload.val();
           this.userResidence.id = data[i].key;
           
-          residenceServiceProvider.getResidence(data[i].payload.val().residence_owner_id, data[i].payload.val().residence_id)
-          .map((Items) => {
-              return Items.map((Item) => {
-                if (Item.key == 'name'){
-                  this.userResidence.residence_name = Item.payload.val();
-                }else if (Item.key == 'photo'){
-                  this.userResidence.residence_photo = Item.payload.val();
-                }else if (Item.key == 'slogan'){
-                  this.userResidence.residence_slogan = Item.payload.val();
-                }else if (Item.key == 'address'){
-                  this.userResidence.residence_address = Item.payload.val();
-                }
-              });
-          }).subscribe(data => {
+          console.log('VALOR: '+ this.userResidence.status);
+
+          // residenceServiceProvider.getResidence(data[i].payload.val().residence_owner_id, data[i].payload.val().residence_id)
+          // .map((Items) => {
+          //     return Items.map((Item) => {
+          //       if (Item.key == 'name'){
+          //         this.userResidence.residence_name = Item.payload.val();
+          //       }else if (Item.key == 'image'){
+          //         this.userResidence.residence_photo = Item.payload.val();
+          //       }else if (Item.key == 'slogan'){
+          //         this.userResidence.residence_slogan = Item.payload.val();
+          //       }else if (Item.key == 'address'){
+          //         this.userResidence.residence_address = Item.payload.val();
+          //       }
+          //     });
+          // }).subscribe(data => {
               if (this.userResidence.status == 'Pending'){
                 this.userResidenceList.push(this.userResidence);
               }else if (this.userResidence.status == 'Active'){
                 //this.navCtrl.push('HelpPage');
                 this.goHomeResident(this.userResidence);
               }
-
-              loading.dismissAll();
-          });
+//          });
         }
       }
+      loading.dismissAll();
     });
 
 
@@ -89,11 +92,18 @@ export class InvitationListPage {
 
   acceptInvitation(userResidence: UserResidence){
 
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: 'Procesando, por favor espere...'
+    });
+    loading.present();
+
     this.resident = null;
     this.residentServiceProvider.getResident(userResidence.residence_owner_id, userResidence.residence_id, userResidence.resident_id)
     .valueChanges().subscribe(data => {
     
       if (this.resident == null){
+        loading.dismissAll();
         this.resident = data;  
         this.navCtrl.push('ResidentPage',{'operation':'complete','resi':this.resident, 'userResi':userResidence});
       }
@@ -125,7 +135,7 @@ export class InvitationListPage {
 
   showMessageEmptyList(){
     let toast = this.toastCtrl.create({
-      message: 'No existen invitaciones.',
+      message: 'No existen invitaciones para el usuario.',
       duration: 3000
     });
     toast.present();

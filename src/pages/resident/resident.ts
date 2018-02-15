@@ -6,6 +6,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ResidentServiceProvider } from '../../providers/resident-service/resident-service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserResidence } from '../../models/user_residence';
+import { Residence } from '../../models/residence';
+import { UserResidenceProvider } from '../../providers/user-residence-service/user-residence-service';
 
 /**
  * Generated class for the ResidentPage page.
@@ -29,6 +31,7 @@ export class ResidentPage {
   residentFormGroup: FormGroup;
   resi: String;
   public userResidence: UserResidence;
+  public residence: Residence;
 
   options: CameraOptions = {
     quality: 100,
@@ -41,6 +44,7 @@ export class ResidentPage {
               public navParams: NavParams, 
               public camera: Camera, 
               public residentServiceProvider: ResidentServiceProvider,
+              public userResidenceProvider: UserResidenceProvider,
               public formBuilder: FormBuilder,
               public toastCtrl: ToastController,
               public afAuth: AngularFireAuth) {
@@ -69,20 +73,25 @@ export class ResidentPage {
       this.title = 'Generar Invitación';
       this.processButton = 'Generar';
       this.resident = new Resident();
-      this.resident.residence_id = navParams.get('residence_id');
+      this.residence = navParams.get('residence');
+      this.resident.residence_id = this.residence.id;
       this.resident.pets = false;
       this.resident.owner = false;
       this.addMode = true;
       this.userResidence = new UserResidence();
       this.userResidence.residence_id = this.resident.residence_id;
       this.userResidence.residence_owner_id = afAuth.auth.currentUser.uid;
+      this.userResidence.residence_name = this.residence.name;
+      this.userResidence.residence_photo = this.residence.image?this.residence.image:null;
+      this.userResidence.residence_slogan = this.residence.slogan;
+      this.userResidence.residence_address = this.residence.address;
 
     } else if (this.operation == 'edit'){
       this.title = 'Editar Residente';
       this.processButton = 'Guardar';
       this.resident = navParams.get('resi');
     } else if (this.operation == 'complete') {
-      this.title = 'Editar Residente';
+      this.title = 'Completar Información Residente';
       this.processButton = 'Guardar';
       this.resident = navParams.get('resi');
       this.userResidence = navParams.get('userResi');
@@ -134,7 +143,8 @@ export class ResidentPage {
         //console.log("User does not exist");
         //console.log('Guardara');
         this.userResidence.email = resident.email;
-        this.residentServiceProvider.addResident(resident,this.userResidence);
+        this.userResidence.resident_id = this.residentServiceProvider.addResident(resident);
+        this.userResidenceProvider.addUserResident(this.userResidence);
         this.navCtrl.pop();
       } else if (this.resi !== '1' && this.resi === null) {
         //console.log("Users exists");
@@ -151,16 +161,15 @@ export class ResidentPage {
   }
 
   editResident(key: string, resident: Resident){
-    if (this.operation == 'complete'){
-      this.residentServiceProvider.updateOnlyResident(resident)
-      this.userResidence.status = 'Active';
-      this.residentServiceProvider.updateUserResident(this.userResidence.id, this.userResidence);
-      this.navCtrl.push('HelpPage');
-    }else {
       this.residentServiceProvider.updateResident(key, resident);
       this.navCtrl.pop();
-    }
-    
+  }
+
+  completeResident(key: string, resident: Resident){
+      this.residentServiceProvider.updateOnlyResident(resident)
+      this.userResidence.status = 'Active';
+      this.userResidenceProvider.updateUserResident(this.userResidence.id, this.userResidence);
+      this.navCtrl.push('WelcomePage',{'resi':this.resident, 'userResi':this.userResidence});
   }
 
   process(){
@@ -169,10 +178,14 @@ export class ResidentPage {
       if (this.operation == 'add'){
         this.saveResident(this.resident);
       } else if (this.operation == 'edit' || this.operation == 'complete'){
-        if (this.resident.car_identifier == undefined){
-          this.resident.car_identifier = null;
+
+        this.resident.car_identifier = this.resident.car_identifier ? this.resident.car_identifier : null;
+
+        if (this.operation == 'edit'){
+          this.editResident(this.resident.id, this.resident);
+        }else{
+          this.completeResident(this.resident.id, this.resident);
         }
-        this.editResident(this.resident.id, this.resident);
       }
     } else {
       let toast = this.toastCtrl.create({

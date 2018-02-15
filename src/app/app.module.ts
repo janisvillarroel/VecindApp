@@ -6,7 +6,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-//import { HomePage } from '../pages/home/home';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth} from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
@@ -14,10 +13,8 @@ import { ResidenceServiceProvider } from '../providers/residence-service/residen
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ResidentServiceProvider } from '../providers/resident-service/resident-service';
 import { RequestProvider } from '../providers/request/request';
+import { UserResidenceProvider } from '../providers/user-residence-service/user-residence-service';
 
-//import {LoginPage} from '../pages/login/login';
-//import {AboutPage} from '../pages/about/about';
-//import {HelpPage} from '../pages/help/help';
 
 
 /* Giovo Database */
@@ -60,8 +57,7 @@ export const configFirebase = {
     HttpClientModule,
     AngularFireModule.initializeApp(configFirebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -77,7 +73,8 @@ export const configFirebase = {
     AngularFireAuth,
     ResidenceServiceProvider,
     ResidentServiceProvider,
-    RequestProvider
+    RequestProvider,
+    UserResidenceProvider
   ]
 })
 export class AppModule {}

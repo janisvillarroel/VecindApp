@@ -10,7 +10,9 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
       </button>
-    <ion-title>Bienvenidos</ion-title>
+    <ion-title *ngIf="role == 'user'">Mi Residencia</ion-title>
+    <ion-title *ngIf="role == 'admin'">Gestionar Residencias</ion-title>
+    <ion-title *ngIf="role == undefined">Bienvenido</ion-title>
   </ion-navbar>
 
 </ion-header>

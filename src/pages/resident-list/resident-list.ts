@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import { Resident } from '../../models/resident';
 import { ResidentServiceProvider } from '../../providers/resident-service/resident-service';
 import { Residence } from '../../models/residence';
+import { UserResidenceProvider } from '../../providers/user-residence-service/user-residence-service';
 
 /**
  * Generated class for the ResidentListPage page.
@@ -24,6 +25,7 @@ export class ResidentListPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public residentServiceProvider: ResidentServiceProvider,
+              public userResidenceProvider: UserResidenceProvider,
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController) {
 
@@ -57,7 +59,7 @@ export class ResidentListPage {
   }
 
   addResident(){
-    this.navCtrl.push('ResidentPage',{'operation':'add','residence_id':this.residence.id});
+    this.navCtrl.push('ResidentPage',{'operation':'add','residence':this.residence});
   }
 
   goEditResident(resident: Resident){
@@ -80,6 +82,7 @@ export class ResidentListPage {
           text: 'Si',
           handler: data => {
             this.residentServiceProvider.deleteResident(resident.id);
+            this.deleteUserResident(resident.id);
           }
         },
         {
@@ -91,6 +94,15 @@ export class ResidentListPage {
       ]
     });
     prompt.present();
+  }
+
+  deleteUserResident(residentId: string){
+    this.userResidenceProvider.getUserResidenceByResident(residentId).snapshotChanges().subscribe(data => {
+
+      for (let i = 0; i < data.length; i++) {
+        this.userResidenceProvider.deleteUserResident(data[i].key);
+      }
+    });
   }
 
 }

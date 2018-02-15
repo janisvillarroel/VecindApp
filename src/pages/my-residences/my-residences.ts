@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Navbar, AlertController, LoadingCo
 import { Residence } from '../../models/residence';
 import { ResidenceServiceProvider } from '../../providers/residence-service/residence-service';
 import { User } from '../../models/user';
+import { UserResidenceProvider } from '../../providers/user-residence-service/user-residence-service';
 
 /**
  * Generated class for the MyResidencesPage page.
@@ -26,6 +27,7 @@ export class MyResidencesPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public residenceServiceProvider: ResidenceServiceProvider,
+              public userResidenceProvider: UserResidenceProvider,
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController) {
 
@@ -89,6 +91,7 @@ export class MyResidencesPage {
           text: 'Si',
           handler: data => {
             this.residenceServiceProvider.deleteResidence(residence.id);
+            this.deleteUserResident(residence.id);
           }
         },
         {
@@ -104,5 +107,14 @@ export class MyResidencesPage {
 
   goResidents(resi: Residence){
     this.navCtrl.push('ResidentListPage',{'resi':resi});
+  }
+
+  deleteUserResident(residenceId: string){
+    this.userResidenceProvider.getUserResidenceByResidence(residenceId).snapshotChanges().subscribe(data => {
+
+      for (let i = 0; i < data.length; i++) {
+        this.userResidenceProvider.deleteUserResident(data[i].key);
+      }
+    });
   }
 }

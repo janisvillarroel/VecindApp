@@ -23,7 +23,6 @@ export class LoginPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public afAuth: AngularFireAuth, public toastCtrl: ToastController) {
-      console.log('ROLL: '+this.navParams.get('role'));
       this.role = this.navParams.get('role');
   }
 

@@ -12,8 +12,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: 'page-userlog',
+  templateUrl: 'userlog.html',
 })
 export class UserLoginPage {
 
