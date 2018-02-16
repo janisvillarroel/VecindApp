@@ -14,6 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ResidentServiceProvider } from '../providers/resident-service/resident-service';
 import { RequestProvider } from '../providers/request/request';
 import { UserResidenceProvider } from '../providers/user-residence-service/user-residence-service';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 
 
@@ -74,7 +75,8 @@ export const configFirebase = {
     ResidenceServiceProvider,
     ResidentServiceProvider,
     RequestProvider,
-    UserResidenceProvider
+    UserResidenceProvider,
+    UserServiceProvider
   ]
 })
 export class AppModule {}

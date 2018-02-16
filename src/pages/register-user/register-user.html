@@ -15,20 +15,35 @@
 
 <ion-content padding>
     <ion-list>
+      <form [formGroup]="registerFormGroup">
         <ion-item>
-          <ion-input type="text" [(ngModel)]="user.name" placeholder="Nombre"></ion-input>
+          <ion-input type="text" [(ngModel)]="user.name" required formControlName="name" [class.invalid]="!registerFormGroup.controls.name.valid && (registerFormGroup.controls.name.dirty)" placeholder="Nombre"></ion-input>
         </ion-item>
+        <ion-item *ngIf="!registerFormGroup.controls.name.valid  && (registerFormGroup.controls.name.dirty)">
+            <p>Ingrese un nombre.</p>
+        </ion-item>
+  
         <ion-item>
-          <ion-input type="text" [(ngModel)]="user.lastName" placeholder="Apellido"></ion-input>
+          <ion-input type="text" [(ngModel)]="user.lastName" required formControlName="lastName" [class.invalid]="!registerFormGroup.controls.lastName.valid && (registerFormGroup.controls.lastName.dirty)" placeholder="Apellido"></ion-input>
         </ion-item>
+        <ion-item *ngIf="!registerFormGroup.controls.lastName.valid  && (registerFormGroup.controls.lastName.dirty)">
+            <p>Ingrese un apellido.</p>
+        </ion-item>
+
         <ion-item>
-          <ion-input type="email" [(ngModel)]="user.email" placeholder="Email"></ion-input>
+          <ion-input type="email" [(ngModel)]="user.email" required formControlName="email" [class.invalid]="!registerFormGroup.controls.email.valid && (registerFormGroup.controls.email.dirty)" placeholder="Email"></ion-input>
         </ion-item>
+        <ion-item *ngIf="!registerFormGroup.controls.email.valid  && (registerFormGroup.controls.email.dirty)">
+            <p>Ingrese un correo electrónico valido.</p>
+        </ion-item>
+
         <ion-item>
-          <ion-input type="password" [(ngModel)]="user.password" placeholder="Password"></ion-input>
+          <ion-input type="password" [(ngModel)]="user.password" required formControlName="password" [class.invalid]="!registerFormGroup.controls.password.valid && (registerFormGroup.controls.password.dirty)" placeholder="Password"></ion-input>
         </ion-item>
-        <button ion-button full color="secondary" ><ion-icon name="camera"></ion-icon></button>
-        
-      </ion-list>
-      <button ion-button full (click)="register()">Register</button>
+        <ion-item *ngIf="!registerFormGroup.controls.password.valid  && (registerFormGroup.controls.password.dirty)">
+            <p>Ingrese una contraseña.</p>
+        </ion-item>
+      </form>  
+    </ion-list>
+    <button ion-button full (click)="register()">Registrar</button>
 </ion-content>

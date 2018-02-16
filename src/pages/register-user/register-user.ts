@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Generated class for the RegisterUserPage page.
@@ -18,9 +20,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class RegisterUserPage {
 
   public user: User = new User();
+  registerFormGroup: FormGroup;
+  aux: String;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-  public afAuth: AngularFireAuth, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public afAuth: AngularFireAuth,
+              public formBuilder: FormBuilder,
+              public userServiceProvider: UserServiceProvider,
+              public toastCtrl: ToastController) {
+
+    this.registerFormGroup = formBuilder.group({
+      name: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*'),Validators.required])],
+      lastName: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*'),Validators.required])],
+      email: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
+      password: ['', Validators.compose([Validators.maxLength(50), Validators.required])]
+    });
   }
 
   ionViewDidLoad() {
@@ -28,10 +43,49 @@ export class RegisterUserPage {
   }
 
   register(){
-    console.log(this.user);
+    //console.log(this.user);
+    if (this.registerFormGroup.valid){
+
+      this.aux = null;
+
+      this.userServiceProvider.getUserByEmail(this.user.email).valueChanges()
+      .forEach (response => {
+        if(response.length === 0 && this.aux === null) {
+          this.aux = '1';
+          this.registerUser();
+        } else if (this.aux !== '1' && this.aux === null) {
+          this.aux = '0';
+          let toast = this.toastCtrl.create({
+            message: 'El correo electrónico ya esta registrado.',
+            duration: 3000
+          });
+          toast.present();
+        }
+      });
+
+      this.aux = null;
+
+    }else {
+      let toast = this.toastCtrl.create({
+        message: 'Por favor revisar la información ingresada.',
+        duration: 3000
+      });
+      toast.present();
+    }
+  }
+
+  registerUser(){
     this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
     .then(result => {
-      this.navCtrl.push('MyResidencesPage');
+      this.userServiceProvider.addUser(this.user);
+      
+      let toast = this.toastCtrl.create({
+        message: 'Se registró exitosamente el usuario.',
+        duration: 2500
+      });
+      toast.present();
+
+      this.navCtrl.push('LoginPage');
     }).catch(err => {
       let toast = this.toastCtrl.create({
         message: err.message,

@@ -29,7 +29,7 @@ export class ResidentPage {
   public processButton: String;
   public addMode: Boolean = false;
   residentFormGroup: FormGroup;
-  resi: String;
+  aux: String;
   public userResidence: UserResidence;
   public residence: Residence;
 
@@ -95,13 +95,6 @@ export class ResidentPage {
       this.processButton = 'Guardar';
       this.resident = navParams.get('resi');
       this.userResidence = navParams.get('userResi');
-//      residentServiceProvider.setResident(this.userResidence.residence_owner_id, this.userResidence.residence_id, this.userResidence.resident_id);
-
-      // residentServiceProvider.getResidents().valueChanges().subscribe(data => {
-     
-      //   this.residentsList = data;
-  
-      // });
     }
   }
 
@@ -134,21 +127,21 @@ export class ResidentPage {
 
   saveResident(resident: Resident){
 
-    this.resi = null;
+    this.aux = null;
 
     this.residentServiceProvider.checkEmail(resident.residence_id, resident.email as string)
     .forEach (response => {
-      if(response.length === 0 && this.resi === null) {
-        this.resi = '1';
+      if(response.length === 0 && this.aux === null) {
+        this.aux = '1';
         //console.log("User does not exist");
         //console.log('Guardara');
         this.userResidence.email = resident.email;
         this.userResidence.resident_id = this.residentServiceProvider.addResident(resident);
         this.userResidenceProvider.addUserResident(this.userResidence);
         this.navCtrl.pop();
-      } else if (this.resi !== '1' && this.resi === null) {
+      } else if (this.aux !== '1' && this.aux === null) {
         //console.log("Users exists");
-        this.resi = '0';
+        this.aux = '0';
         let toast = this.toastCtrl.create({
           message: 'El correo electrónico esta asociado a un residente.',
           duration: 3000
@@ -157,7 +150,7 @@ export class ResidentPage {
       }
     });
 
-    this.resi = null;
+    this.aux = null;
   }
 
   editResident(key: string, resident: Resident){
