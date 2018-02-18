@@ -7,26 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Nueva Solicitud </ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-      <ion-list>
-            <ion-item>
-              <ion-label color="primary" stacked>Fecha:  {{ request.timestamp | date:"MM/dd/yy hh:mm a" }}  </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label color="primary" stacked>Motivo</ion-label>
-              <ion-input type="text" [(ngModel)]="request.reason"  
-              placeholder="Motivo"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label color="primary" stacked>Teléfono</ion-label>
-              <ion-input type="text" [(ngModel)]="request.description"   
-              placeholder="Descripcion"></ion-input>
-            </ion-item>    
-      </ion-list>
-      <button ion-button full (click)="save()">Guardar</button>
-  </ion-content>
+  <ion-title>Nueva Solicitud </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+          <ion-item>
+            <ion-label color="primary" stacked>Fecha:  {{ request.timestamp | date:"MM/dd/yy hh:mm a" }}  </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" stacked>Motivo</ion-label>
+            <ion-input type="text" [(ngModel)]="request.reason"  
+            placeholder="Motivo"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" stacked>Descripcion</ion-label>
+            <ion-input type="text" [(ngModel)]="request.description"   
+            placeholder="Descripcion"></ion-input>
+          </ion-item>    
+    </ion-list>
+    <button ion-button full (click)="save()">Guardar</button>
+</ion-content>
   

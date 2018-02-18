@@ -4,6 +4,7 @@ import { Residence } from '../../models/residence';
 import { RequestObject } from '../../models/request';
 import { RequestProvider } from '../../providers/request/request';
 import { User } from '../../models/user';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the RequestListPage page.
@@ -23,10 +24,11 @@ export class RequestListPage {
   public user: User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public requestProvider: RequestProvider) {
+    public requestProvider: RequestProvider,
+    public afAuth: AngularFireAuth) {
     this.residence = navParams.get('residence');
     this.user = navParams.get('user');
-    requestProvider.setRequestsFromResidence(this.residence.id);
+    requestProvider.setRequestsFromResidenceAndUserOwner(this.residence.id,this.afAuth.auth.currentUser.uid);
     requestProvider.getRequest().subscribe(data => {
       this.requestList = new Array();
       for (let i = 0; i < data.length; i++) {
@@ -39,18 +41,25 @@ export class RequestListPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RequestListPage');
   }
-
-  addRequest(residence:Residence){
-    this.navCtrl.push('RequestPage',{'residence':residence,'user':this.user});
+  
+  receiveRequest(request: RequestObject){
+    request.status='Recepcionado';
+    request.progress=15;
+    this.requestProvider.updateRequest(request.id,request);
   }
 
-  goEditRequest(request: RequestObject){
-    this.navCtrl.push('RequestEditPage',{'request':request,'residence':this.residence,'user':this.user});
+  progressRequest(request: RequestObject){
+    request.status='En proceso';
+    request.progress=20;
+    this.requestProvider.updateRequest(request.id,request);
   }
 
-  deleteRequest(request: RequestObject){
-    this.requestProvider.deleteRequest(request.id);
+  completeRequest(request: RequestObject){
+    request.status='Completado';
+    request.progress=100;
+    this.requestProvider.updateRequest(request.id,request);
   }
+
   goDetailRequest(request: RequestObject){
     this.navCtrl.push('RequestDetailPage',{'request':request,'residence':this.residence,'user':this.user});
   }

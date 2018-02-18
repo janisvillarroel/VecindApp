@@ -8,6 +8,7 @@ export class UserResidence {
     residence_name: String;
     residence_address: String;
     residence_photo: String;
+    residence_phone: String;
     residence_slogan: String;
     residence_owner_id: string;
     status: string;

@@ -21,8 +21,12 @@ export class RequestProvider {
                
   }
 
-  setRequestsFromResidence(residenceId: string){
-    this.requests = this.requestsdb.list('/residences/'+this.afAuth.auth.currentUser.uid+'/'+residenceId+'/requests');
+  setRequestsFromResidenceAndUserOwner(residenceId: string,userOwnerId:string){
+    this.requests = this.requestsdb.list('/residences/'+userOwnerId+'/'+residenceId+'/requests');
+  }
+
+  getRequestByResidenceAndUserId(residenceId: string,userOwnerId:string,userId:string): Observable<any[]>{
+    return this.requestsdb.list('/residences/'+userOwnerId+'/'+residenceId+'/requests', ref => ref.orderByChild('userId').equalTo(userId)).snapshotChanges();
   }
 
   getRequest(): Observable<any[]>{

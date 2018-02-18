@@ -149,7 +149,7 @@ export class InvitationListPage {
     
       if (this.resident == null){
         this.resident = data;  
-        this.navCtrl.push('WelcomePage',{'resi':this.resident, 'userResi':userResidence});
+        this.navCtrl.push('HomeResidencePage',{'resi':this.resident, 'userResi':userResidence});
       }
     });
   }

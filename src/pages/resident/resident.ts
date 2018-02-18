@@ -85,6 +85,7 @@ export class ResidentPage {
       this.userResidence.residence_photo = this.residence.image?this.residence.image:null;
       this.userResidence.residence_slogan = this.residence.slogan;
       this.userResidence.residence_address = this.residence.address;
+      this.userResidence.residence_phone = this.residence.phone;
 
     } else if (this.operation == 'edit'){
       this.title = 'Editar Residente';

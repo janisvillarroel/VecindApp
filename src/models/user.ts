@@ -6,6 +6,5 @@ export class User {
     password: string;
   
     constructor() {
-    }
-    
-  }
+    } 
+}

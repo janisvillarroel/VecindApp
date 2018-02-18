@@ -4,13 +4,12 @@ export class RequestObject {
     reason: String;
     description: String;
     status: String;
-    residence_id: string;
+    residenceId: string;
     timestamp :number;
     userId: string;
-    userName: string;
+    userEmail: String;
     progress: number;
     constructor() {
     }
     
-    
-  }
+}

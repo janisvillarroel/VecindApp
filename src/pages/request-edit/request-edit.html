@@ -9,9 +9,7 @@
   <ion-navbar>
     <ion-title>Editar Solicitud</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
     <ion-list>
@@ -24,10 +22,10 @@
           placeholder="Motivo"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label color="primary" stacked>Teléfono</ion-label>
+          <ion-label color="primary" stacked>Descripcion</ion-label>
           <ion-input type="text" [(ngModel)]="request.description"   
           placeholder="Descripcion"></ion-input>
         </ion-item>    
-  </ion-list>
-  <button ion-button full (click)="save()">Guardar</button>
+    </ion-list>
+    <button ion-button full (click)="save()">Guardar</button>
 </ion-content>

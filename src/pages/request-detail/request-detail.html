@@ -17,14 +17,29 @@
         <b>Fecha:</b> {{ request.timestamp | date:"MM/dd/yy hh:mm a" }} <br/>
         <b>Motivo:</b> {{ request.reason }} <br/>
         <b>Descripcion:</b> {{ request.description }} <br/>
-        <b>Usuario:</b> {{ request.userName }} <br/>
+        <b>Usuario:</b> {{ request.userEmail }} <br/>
         <b>Estado:</b> {{ request.status }}
     </p>
-    Comentarios:
+    <div *ngIf="addComment == true ">
+    <ion-list >
+        <ion-item>
+          <ion-label color="primary" stacked> Adicionar comentario</ion-label>
+          <ion-input type="text" [(ngModel)]="comment.description"  
+          placeholder="Adicionar comentario"></ion-input>
+        </ion-item> 
+    </ion-list >
+    <button ion-button full (click)="save()">Guardar</button>
+    <br/>
+    </div>
+    <b>Historico de comentarios:</b>
     <ion-list>
-        <ion-item-sliding #item *ngFor="let request of answerList">
+        <ion-item-sliding #item *ngFor="let comment of commentList">
           <ion-item >
-
+              <p>
+                  <b>Fecha:</b> {{ comment.timestamp | date:"MM/dd/yy hh:mm a" }} <br/>
+                  <b>Usuario:</b> {{ comment.userEmail }} <br/>
+                  <b>Comentario:</b> {{ comment.description }} <br/>
+              </p>
           </ion-item>
         </ion-item-sliding>
       </ion-list>

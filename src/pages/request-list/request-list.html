@@ -7,12 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Solicitudes de mis residencias de: <b>{{residence.name}}</b></ion-title>
-    <ion-buttons end>
-        <button ion-button icon-only (click)="addRequest(residence)">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-buttons>
+    <ion-title>Solicitudes de mi residencia: <b>{{residence.name}}</b></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -24,13 +19,19 @@
               <b>Fecha:</b> {{ request.timestamp | date:"MM/dd/yy hh:mm a" }} <br/>
               <b>Motivo:</b> {{ request.reason }} <br/>
               <b>Descripcion:</b> {{ request.description }} <br/>
-              <b>Usuario:</b> {{ request.userName }} <br/>
+              <b>Usuario:</b> {{ request.userEmail }} <br/>
               <b>Estado:</b> {{ request.status }}
             </p>
             <ion-buttons>
-              <button ion-button icon-only (click)="goEditRequest(request)">
-                  <ion-icon name="create"></ion-icon>
+              <button ion-button icon-only (click)="receiveRequest(request)" *ngIf="request.status == 'Enviado'" >
+                  <ion-icon name="mail-open"></ion-icon>
               </button>
+              <button ion-button icon-only (click)="progressRequest(request)" *ngIf="request.status == 'Recepcionado'" >
+                  <ion-icon name="hammer"></ion-icon>
+              </button> 
+              <button ion-button icon-only (click)="completeRequest(request)" *ngIf="request.status == 'En proceso'" >
+                  <ion-icon name="checkmark"></ion-icon>
+              </button> 
               <button ion-button icon-only (click)="goDetailRequest(request)">
                   <ion-icon name="search"></ion-icon>
               </button>
@@ -41,11 +42,6 @@
                 </div>
             </div>
           </ion-item>
-          <ion-item-options side="right">
-              <button ion-button  color="danger" (click)="deleteRequest(request)"><ion-icon name="trash"></ion-icon>
-                 Eliminar
-              </button>
-            </ion-item-options>
         </ion-item-sliding>
       </ion-list>
 </ion-content>

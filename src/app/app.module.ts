@@ -15,10 +15,11 @@ import { ResidentServiceProvider } from '../providers/resident-service/resident-
 import { RequestProvider } from '../providers/request/request';
 import { UserResidenceProvider } from '../providers/user-residence-service/user-residence-service';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { CommentProvider } from '../providers/comment/comment';
 
 
 
-/* Giovo Database */
+/* Giovo Database 
 export const configFirebase = {
   apiKey: "AIzaSyDgwtrPA9_vLwRO459eqP1mNDdGErvbzOo",
   authDomain: "ionic-chat-bbe23.firebaseapp.com",
@@ -26,16 +27,16 @@ export const configFirebase = {
   projectId: "ionic-chat-bbe23",
   storageBucket: "ionic-chat-bbe23.appspot.com",
   messagingSenderId: "306849589842"
-};
+};*/
 /* Janis Database */
-/*export const configFirebase = {
+export const configFirebase = {
   apiKey: "AIzaSyAhtRFkrV0k_zOcwcJbUyOGqHNs7kAmr7U",
   authDomain: "finalproject-a0e01.firebaseapp.com",
   databaseURL: "https://finalproject-a0e01.firebaseio.com",
   projectId: "finalproject-a0e01",
   storageBucket: "finalproject-a0e01.appspot.com",
   messagingSenderId: "445318475144"
-};*/
+};
 
 /* Isaac Database */
 /* export const configFirebase = {
@@ -76,7 +77,8 @@ export const configFirebase = {
     ResidentServiceProvider,
     RequestProvider,
     UserResidenceProvider,
-    UserServiceProvider
+    UserServiceProvider,
+    CommentProvider
   ]
 })
 export class AppModule {}

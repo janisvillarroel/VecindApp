@@ -1,13 +1,12 @@
-export class Comment {
+export class CommentRequest {
 
     id: string;
-    
-    residence_id: string;
+    requestId: string;
     timestamp :number;
     userId: string;
+    description: string;
+    userEmail: String;
 
     constructor() {
     }
-    
-    
   }

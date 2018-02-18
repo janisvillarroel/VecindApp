@@ -4,7 +4,7 @@ import { Residence } from '../../models/residence';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-
+import { AngularFireObject } from 'angularfire2/database/interfaces';
 /*
   Generated class for the ResidenceServiceProvider provider.
 
@@ -44,8 +44,7 @@ export class ResidenceServiceProvider {
     this.residences.remove(key);
   }
 
-  getResidence(userId: string, residentId: string): Observable<any[]>{
-    this.residences = this.residencesdb.list('/residences/'+userId+'/'+residentId);
-    return this.residences.snapshotChanges();
+  getResidence(userId: string, residenceId: string): AngularFireObject<Residence>{
+    return this.residencesdb.object('/residences/'+userId+'/'+residenceId);
   }
 }

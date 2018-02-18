@@ -4,6 +4,7 @@ import { RequestProvider } from '../../providers/request/request';
 import { RequestObject } from '../../models/request';
 import { Residence } from '../../models/residence';
 import { User } from '../../models/user';
+import { UserResidence } from '../../models/user_residence';
 
 /**
  * Generated class for the RequestPage page.
@@ -21,20 +22,21 @@ export class RequestPage {
 
   public request: RequestObject;
   public residence: Residence;
-  public user: User;
+  public user: UserResidence;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public requestProvider: RequestProvider) {
       this.residence = this.navParams.get('residence');
-      this.user = this.navParams.get('user');
+      this.user = this.navParams.get('userResidence');
       this.request= new RequestObject();
       this.request.timestamp = Date.now();
-      this.request.status="Registered"
-      this.request.residence_id= this.residence.id;
-      this.request.userName=this.user.email;
+      this.request.status="Registrado"
+      this.request.residenceId= this.residence.id;
+      this.request.userEmail=this.user.email;
+      this.request.userId=this.user.id;
       this.request.progress=10;
-      this.requestProvider.setRequestsFromResidence(this.residence.id);
+      this.requestProvider.setRequestsFromResidenceAndUserOwner(this.residence.id,this.user.residence_owner_id);
   }
 
   ionViewDidLoad() {
