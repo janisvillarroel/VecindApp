@@ -59,9 +59,9 @@ export class ResidentPage {
       this.residentFormGroup = formBuilder.group({
         email: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
         name: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*'),Validators.required])],
-        lastName: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*'),Validators.required])],
+        last_name: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*'),Validators.required])],
         phone: ['', Validators.compose([Validators.minLength(8), Validators.maxLength(8), Validators.pattern('([2,3,4,5,6,7])[0-9 ]*'),Validators.required])],
-        apartmentNumber: ['', Validators.compose([Validators.maxLength(20), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*')])],
+        apartment_number: ['', Validators.compose([Validators.maxLength(20), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*')])],
         car_identifier: ['', Validators.compose([Validators.maxLength(7), Validators.pattern('[0-9][0-9][0-9][0-9][a-zA-Z][a-zA-Z][a-zA-Z]')])],
         pets: [''],
         owner: ['']

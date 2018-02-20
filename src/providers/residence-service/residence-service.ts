@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Residence } from '../../models/residence';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/Observable';
 import { AngularFireObject } from 'angularfire2/database/interfaces';
 /*
   Generated class for the ResidenceServiceProvider provider.

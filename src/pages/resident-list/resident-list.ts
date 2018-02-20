@@ -71,7 +71,7 @@ export class ResidentListPage {
     if (resident.name == undefined){
       auxTitle = 'Residente';
     } else {
-      auxTitle = resident.name +' '+resident.lastName;
+      auxTitle = resident.name +' '+resident.last_name;
     }
 
     let prompt = this.alertCtrl.create({

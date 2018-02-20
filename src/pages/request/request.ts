@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RequestProvider } from '../../providers/request/request';
 import { RequestObject } from '../../models/request';
 import { Residence } from '../../models/residence';
-import { User } from '../../models/user';
 import { UserResidence } from '../../models/user_residence';
 
 /**

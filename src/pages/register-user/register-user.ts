@@ -22,6 +22,7 @@ export class RegisterUserPage {
   public user: User = new User();
   registerFormGroup: FormGroup;
   aux: String;
+  public role: String;
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -29,6 +30,8 @@ export class RegisterUserPage {
               public formBuilder: FormBuilder,
               public userServiceProvider: UserServiceProvider,
               public toastCtrl: ToastController) {
+
+    this.role = this.navParams.get('role');
 
     this.registerFormGroup = formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-ZÀ-ÿ0-9. ]*'),Validators.required])],
@@ -85,7 +88,7 @@ export class RegisterUserPage {
       });
       toast.present();
 
-      this.navCtrl.push('LoginPage');
+      this.navCtrl.push('LoginPage',{'role':this.role});
     }).catch(err => {
       let toast = this.toastCtrl.create({
         message: err.message,

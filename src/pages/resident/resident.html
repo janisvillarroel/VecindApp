@@ -34,9 +34,9 @@
   
               <ion-item *ngIf="!addMode">
                   <ion-label color="primary" stacked>Apellidos</ion-label>
-                  <ion-input type="text" [(ngModel)]="resident.lastName" required formControlName="lastName" [class.invalid]="!residentFormGroup.controls.lastName.valid && (residentFormGroup.controls.lastName.dirty)" placeholder="Apellidos"></ion-input>
+                  <ion-input type="text" [(ngModel)]="resident.last_name" required formControlName="last_name" [class.invalid]="!residentFormGroup.controls.last_name.valid && (residentFormGroup.controls.last_name.dirty)" placeholder="Apellidos"></ion-input>
               </ion-item>
-              <ion-item *ngIf="!addMode && !residentFormGroup.controls.lastName.valid  && residentFormGroup.controls.lastName.dirty">
+              <ion-item *ngIf="!addMode && !residentFormGroup.controls.last_name.valid  && residentFormGroup.controls.last_name.dirty">
                     <p>Ingrese un apellido valido.</p>
               </ion-item>
     
@@ -50,9 +50,9 @@
   
               <ion-item *ngIf="!addMode">
                   <ion-label color="primary" stacked>Departamento/Residencia</ion-label>
-                  <ion-input type="text" [(ngModel)]="resident.apartmentNumber" required formControlName="apartmentNumber" [class.invalid]="!residentFormGroup.controls.apartmentNumber.valid && (residentFormGroup.controls.apartmentNumber.dirty)" placeholder="Departamento"></ion-input>
+                  <ion-input type="text" [(ngModel)]="resident.apartment_number" required formControlName="apartment_number" [class.invalid]="!residentFormGroup.controls.apartment_number.valid && (residentFormGroup.controls.apartment_number.dirty)" placeholder="Departamento"></ion-input>
               </ion-item>
-              <ion-item *ngIf="!addMode && !residentFormGroup.controls.apartmentNumber.valid  && residentFormGroup.controls.apartmentNumber.dirty">
+              <ion-item *ngIf="!addMode && !residentFormGroup.controls.apartment_number.valid  && residentFormGroup.controls.apartment_number.dirty">
                     <p>Ingrese un numero de departamento/residencia valido.</p>
               </ion-item>
   

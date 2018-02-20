@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { RequestObject } from '../../models/request'
 import { CommentRequest } from '../../models/comment';
 /*
   Generated class for the CommentProvider provider.
