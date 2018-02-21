@@ -16,7 +16,7 @@
     <p>
         <b>Fecha:</b> {{ request.timestamp | date:"MM/dd/yy hh:mm a" }} <br/>
         <b>Motivo:</b> {{ request.reason }} <br/>
-        <b>Descripcion:</b> {{ request.description }} <br/>
+        <b>Descripción:</b> {{ request.description }} <br/>
         <b>Usuario:</b> {{ request.userEmail }} <br/>
         <b>Estado:</b> {{ request.status }}
     </p>
@@ -31,7 +31,7 @@
     <button ion-button full (click)="save()">Guardar</button>
     <br/>
     </div>
-    <b>Historico de comentarios:</b>
+    <b>Histórico de comentarios:</b>
     <ion-list>
         <ion-item-sliding #item *ngFor="let comment of commentList">
           <ion-item >
