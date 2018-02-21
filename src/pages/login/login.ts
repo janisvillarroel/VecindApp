@@ -38,7 +38,7 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-//    this.setBackButtonAction();
+    this.setBackButtonAction();
   }
 
   login(){
@@ -76,13 +76,12 @@ export class LoginPage {
   }
 
    //Method to override the default back button action
-  // setBackButtonAction(){
-  //   this.navBar.backButtonClick = () => {
-  //   //Write here wherever you wanna do
-  //    //this.navCtrl.pop();
-  //    console.log('Back Button');
-  //    this.navCtrl.push('WelcomePage');
-  //   }
-  // }
+  setBackButtonAction(){
+    this.navBar.backButtonClick = () => {
+    //Write here wherever you wanna do
+     //this.navCtrl.pop();
+     this.navCtrl.setRoot('WelcomePage');
+    }
+  }
 
 }

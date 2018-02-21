@@ -55,29 +55,14 @@ export class InvitationListPage {
           this.userResidence = data[i].payload.val();
           this.userResidence.id = data[i].key;
           
-          console.log('VALOR: '+ this.userResidence.status);
+//          console.log('VALOR: '+ this.userResidence.status);
 
-          // residenceServiceProvider.getResidence(data[i].payload.val().residence_owner_id, data[i].payload.val().residence_id)
-          // .map((Items) => {
-          //     return Items.map((Item) => {
-          //       if (Item.key == 'name'){
-          //         this.userResidence.residence_name = Item.payload.val();
-          //       }else if (Item.key == 'image'){
-          //         this.userResidence.residence_photo = Item.payload.val();
-          //       }else if (Item.key == 'slogan'){
-          //         this.userResidence.residence_slogan = Item.payload.val();
-          //       }else if (Item.key == 'address'){
-          //         this.userResidence.residence_address = Item.payload.val();
-          //       }
-          //     });
-          // }).subscribe(data => {
-              if (this.userResidence.status == 'Pending'){
-                this.userResidenceList.push(this.userResidence);
-              }else if (this.userResidence.status == 'Active'){
-                //this.navCtrl.push('HelpPage');
-                this.goHomeResident(this.userResidence);
-              }
-//          });
+          if (this.userResidence.status == 'Pending'){
+            this.userResidenceList.push(this.userResidence);
+          }else if (this.userResidence.status == 'Active'){
+            //this.navCtrl.push('HelpPage');
+            this.goHomeResident(this.userResidence);
+          }
         }
       }
       loading.dismissAll();

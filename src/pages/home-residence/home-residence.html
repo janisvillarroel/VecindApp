@@ -4,14 +4,23 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title>Datos de mi residencia</ion-title>
   </ion-navbar>
 
-</ion-header>
-<ion-content padding>
+</ion-header> -->
+
+<ion-tabs>
+  <ion-tab [root]="residenceViewRoot" tabTitle="Mi Residencia" [rootParams]="resParams" tabIcon="home"></ion-tab>    
+  <ion-tab [root]="residentViewRoot" tabTitle="Mis Datos" [rootParams]="resParams" tabIcon="contact"></ion-tab>    
+  <ion-tab [root]="reqlistResidenceRoot" [rootParams]="resParams" tabTitle="Mis Solicitudes" tabIcon="logo-buffer"></ion-tab>
+  <ion-tab [root]="notificationRoot" tabTitle="Mis Notificaciones" tabIcon="information-circle"></ion-tab>
+  <ion-tab tabTitle="Logout" tabIcon="exit" (ionSelect)="goExit()"></ion-tab>
+</ion-tabs>
+
+<!-- <ion-content padding>
       <ion-item >
         <b>Residencia: </b>{{userResidence.residence_name}} <br/>
       </ion-item>
@@ -67,4 +76,4 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->
