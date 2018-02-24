@@ -164,7 +164,7 @@ export class ResidentPage {
       this.userResidence.status = 'Active';
       this.userResidenceProvider.updateUserResident(this.userResidence.id, this.userResidence);
 //      this.navCtrl.push('WelcomePage',{'resi':this.resident, 'userResi':this.userResidence});
-      this.navCtrl.push('HomeResidencePage',{'resi':this.resident, 'userResi':this.userResidence});
+      this.navCtrl.setRoot('HomeResidencePage',{'resi':this.resident, 'userResi':this.userResidence});
   }
 
   process(){
