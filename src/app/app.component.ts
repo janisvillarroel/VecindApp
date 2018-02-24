@@ -39,8 +39,8 @@ export class MyApp {
     this.initializeApp();
 
     this.appMenuItems = [
-        {title: 'Mi Residencia', component: 'LoginPage', icon: 'home'},
         {title: 'Gestionar Residencias', component: 'LoginPage', icon: 'people'},
+        {title: 'Mi Residencia', component: 'LoginPage', icon: 'home'},
     ];
 
     this.accountMenuItems = [

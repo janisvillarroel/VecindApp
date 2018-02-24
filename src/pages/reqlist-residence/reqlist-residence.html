@@ -20,7 +20,7 @@
       <ion-item-sliding #item *ngFor="let request of requestList">
         <ion-item >
           <p>
-            <b>Fecha:</b> {{ request.timestamp | date:"MM/dd/yy hh:mm a" }} <br/>
+            <b>Fecha:</b> {{ request.timestamp | date:"dd/MM/yyyy HH:mm:ss" }} <br/>
             <b>Motivo:</b> {{ request.reason }} <br/>
             <b>Descripción:</b> {{ request.description }} <br/>
             <b>Usuario:</b> {{ request.userEmail }} <br/>

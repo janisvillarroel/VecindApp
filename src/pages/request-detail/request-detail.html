@@ -14,7 +14,7 @@
 
 <ion-content padding>
     <p>
-        <b>Fecha:</b> {{ request.timestamp | date:"MM/dd/yy hh:mm a" }} <br/>
+        <b>Fecha:</b> {{ request.timestamp | date:"dd/MM/yyyy HH:mm:ss" }} <br/>
         <b>Motivo:</b> {{ request.reason }} <br/>
         <b>Descripción:</b> {{ request.description }} <br/>
         <b>Usuario:</b> {{ request.userEmail }} <br/>
@@ -36,7 +36,7 @@
         <ion-item-sliding #item *ngFor="let comment of commentList">
           <ion-item >
               <p>
-                  <b>Fecha:</b> {{ comment.timestamp | date:"MM/dd/yy hh:mm a" }} <br/>
+                  <b>Fecha:</b> {{ comment.timestamp | date:"dd/MM/yyyy HH:mm:ss" }} <br/>
                   <b>Usuario:</b> {{ comment.userEmail }} <br/>
                   <b>Comentario:</b> {{ comment.description }} <br/>
               </p>
