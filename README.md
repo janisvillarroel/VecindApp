@@ -30,3 +30,21 @@ Proyecto Final Diplomado Aplicaciones Moviles 4ta Version
     ```
     ionic serve
     ```
+6. **Configuración Reglas Firebase
+    ```
+    La base de datos Firebase tiene que tener las siguientes reglas:
+      {
+        "rules": {
+          ".read": "true",
+          ".write": "true",
+          "user_residences": {
+            ".indexOn": ["email","resident_id","residence_id"]
+           },
+          "users": {
+            ".indexOn": ["email"]
+           },
+          "requests": {
+            ".indexOn": ["userId"]
+           }
+        }
+      }
