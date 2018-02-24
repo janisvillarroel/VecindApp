@@ -40,6 +40,9 @@ export class RequestDetailPage {
           this.user.residence_owner_id,
           this.request.id );
         this.addComment=false;
+        if(this.request.status=='En proceso'){
+          this.addComment=true;
+        }
       }else{
         this.commentProvider.setCommentsFromResidenceAndUserOwnerAndRequest(this.residence.id,
           this.afAuth.auth.currentUser.uid,
@@ -69,5 +72,6 @@ export class RequestDetailPage {
     this.comment.userId=this.afAuth.auth.currentUser.uid;
     this.comment.userEmail=this.afAuth.auth.currentUser.email;
     this.commentProvider.addComment(this.comment);
+    this.comment.description="";
   }
 }
