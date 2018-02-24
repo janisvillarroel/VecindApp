@@ -35,6 +35,7 @@ export class RequestDetailPage {
       this.residence = this.navParams.get('residence');
       this.user = this.navParams.get('userResidence');
       this.request= this.navParams.get('request');
+      this.comment = new CommentRequest();
       if(this.user != undefined){
         this.commentProvider.setCommentsFromResidenceAndUserOwnerAndRequest(this.user.residence_id,
           this.user.residence_owner_id,
@@ -51,7 +52,7 @@ export class RequestDetailPage {
         if(this.request.status=='En proceso'){
           this.addComment=true;
         }
-        this.comment = new CommentRequest();
+        
       }
         commentProvider.getComments().subscribe(data => {
           this.commentList = new Array();
