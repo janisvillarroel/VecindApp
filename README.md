@@ -30,7 +30,7 @@ Proyecto Final Diplomado Aplicaciones Moviles 4ta Version
     ```
     ionic serve
     ```
-6. **Configuración Reglas Firebase
+6. **Configuración Reglas Firebase**
     ```
     La base de datos Firebase tiene que tener las siguientes reglas:
       {
